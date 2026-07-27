@@ -2,12 +2,18 @@
    DASHBOARD LAYOUT
 ========================================================= */
 
-.dashboard-layout {
-  min-height: 100vh;
+/* Add spacing around dashboard content */
+.dashboard-layout main {
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+}
 
-  display: flex;
-
-  background: #f6f8fc;
+@media (min-width: 768px) {
+  .dashboard-layout main {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 
@@ -1880,3 +1886,4 @@ a:focus-visible {
     animation-iteration-count: 1 !important;
   }
 }
+
