@@ -1,27 +1,33 @@
-import { HiOutlineBell, HiOutlineSearch, HiOutlineMenu } from "react-icons/hi";
+import { HiOutlineMenuAlt2, HiOutlineBell } from "react-icons/hi";
 
 import { useAuth } from "../../context/AuthContext";
 
-const Topbar = () => {
+const Topbar = ({ onMenuClick }) => {
   const { user } = useAuth();
 
   return (
     <header className="dashboard-topbar">
-      <button className="mobile-menu-button">
-        <HiOutlineMenu />
+      {/* Mobile menu button */}
+      <button
+        type="button"
+        className="mobile-menu-button"
+        onClick={onMenuClick}
+        aria-label="Open menu"
+      >
+        <HiOutlineMenuAlt2 />
       </button>
 
+      {/* Search */}
       <div className="topbar-search">
-        <HiOutlineSearch />
-
-        <input type="text" placeholder="Search anything..." />
+        <span>Search dashboard...</span>
       </div>
 
+      {/* Right actions */}
       <div className="topbar-actions">
-        <button className="notification-button">
+        <button type="button" className="notification-button">
           <HiOutlineBell />
 
-          <span className="notification-dot"></span>
+          <span className="notification-dot" />
         </button>
 
         <div className="topbar-user">

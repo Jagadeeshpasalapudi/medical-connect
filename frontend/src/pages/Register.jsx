@@ -150,7 +150,12 @@ const Register = () => {
                   onChange={handleChange}
                 />
 
-                <button type="button" className="password-toggle" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? "Hide password" : "Show password"}>
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword((value) => !value)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
                   {showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
                 </button>
               </div>
@@ -201,9 +206,17 @@ const Register = () => {
                   value={formData.password}
                   onChange={handleChange}
                 />
+
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() => setShowPassword((value) => !value)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
+                </button>
               </div>
             </div>
-
             <div className="input-group">
               <label>I am a</label>
 

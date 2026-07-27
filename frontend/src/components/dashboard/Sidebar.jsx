@@ -4,18 +4,15 @@ import {
   HiOutlineHome,
   HiOutlineCalendar,
   HiOutlineUserGroup,
-  HiOutlineDocumentText,
-  HiOutlineChatAlt2,
-  HiOutlineHeart,
   HiOutlineCog,
   HiOutlineLogout,
   HiOutlineUsers,
-  HiOutlineClipboardList,
+  HiOutlineX,
 } from "react-icons/hi";
 
 import { useAuth } from "../../context/AuthContext";
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout } = useAuth();
 
   const patientLinks = [
@@ -84,8 +81,23 @@ const Sidebar = () => {
         ? doctorLinks
         : adminLinks;
 
+  const handleLogout = () => {
+    onClose();
+    logout();
+  };
+
   return (
-    <aside className="dashboard-sidebar">
+    <aside className={`dashboard-sidebar ${isOpen ? "mobile-open" : ""}`}>
+      {/* Mobile close button */}
+      <button
+        type="button"
+        className="sidebar-close-button"
+        onClick={onClose}
+        aria-label="Close menu"
+      >
+        <HiOutlineX />
+      </button>
+
       <div className="sidebar-brand">
         <span className="sidebar-brand-icon">+</span>
 
@@ -116,6 +128,7 @@ const Sidebar = () => {
             <NavLink
               key={link.path}
               to={link.path}
+              onClick={onClose}
               className={({ isActive }) =>
                 isActive ? "sidebar-link active" : "sidebar-link"
               }
@@ -132,13 +145,22 @@ const Sidebar = () => {
         <button
           type="button"
           className="sidebar-link"
-          onClick={() => window.alert("Settings will be available in a future module.")}
+          onClick={() => {
+            onClose();
+
+            window.alert("Settings will be available in a future module.");
+          }}
         >
           <HiOutlineCog />
+
           <span>Settings</span>
         </button>
 
-        <button className="sidebar-link logout-link" onClick={logout}>
+        <button
+          type="button"
+          className="sidebar-link logout-link"
+          onClick={handleLogout}
+        >
           <HiOutlineLogout />
 
           <span>Logout</span>
