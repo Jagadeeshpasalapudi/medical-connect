@@ -1,0 +1,13 @@
+const express = require("express");
+const router = express.Router();
+const { createDoctorProfile, getAllDoctors, getDoctorById, getMyDoctorProfile, updateDoctorProfile, getAllDoctorsAdmin, approveDoctor, rejectDoctor } = require("../controllers/doctorController");
+const { protect, adminOnly, roleOnly } = require("../middleware/authMiddleware");
+router.get("/", getAllDoctors);
+router.post("/profile", protect, roleOnly("doctor"), createDoctorProfile);
+router.get("/profile/me", protect, roleOnly("doctor"), getMyDoctorProfile);
+router.put("/profile/me", protect, roleOnly("doctor"), updateDoctorProfile);
+router.get("/admin/all", protect, adminOnly, getAllDoctorsAdmin);
+router.put("/admin/:id/approve", protect, adminOnly, approveDoctor);
+router.put("/admin/:id/reject", protect, adminOnly, rejectDoctor);
+router.get("/:id", getDoctorById);
+module.exports = router;

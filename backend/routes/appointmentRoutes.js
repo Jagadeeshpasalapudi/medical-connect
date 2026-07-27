@@ -1,0 +1,12 @@
+const express = require("express");
+const router = express.Router();
+const { protect, roleOnly } = require("../middleware/authMiddleware");
+const { createAppointment, getPatientAppointments, getDoctorAppointments, getAppointmentById, updateAppointmentStatus, cancelAppointment, getBookedSlots } = require("../controllers/appointmentController");
+router.get("/booked-slots", getBookedSlots);
+router.post("/", protect, roleOnly("patient"), createAppointment);
+router.get("/patient", protect, roleOnly("patient"), getPatientAppointments);
+router.get("/doctor", protect, roleOnly("doctor"), getDoctorAppointments);
+router.get("/:id", protect, getAppointmentById);
+router.put("/:id/status", protect, roleOnly("doctor"), updateAppointmentStatus);
+router.put("/:id/cancel", protect, roleOnly("patient"), cancelAppointment);
+module.exports = router;

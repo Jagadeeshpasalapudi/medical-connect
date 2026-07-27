@@ -1,0 +1,15 @@
+const express = require("express");
+const { protect, adminOnly } = require("../middleware/authMiddleware");
+const { getDashboardStats, getAllDoctors, approveDoctor, rejectDoctor, getAllUsers, deleteUser, toggleUserStatus, getAllAppointments, updateAppointmentStatus } = require("../controllers/adminController");
+const router = express.Router();
+router.use(protect, adminOnly);
+router.get("/stats", getDashboardStats);
+router.get("/doctors", getAllDoctors);
+router.put("/doctors/:id/approve", approveDoctor);
+router.put("/doctors/:id/reject", rejectDoctor);
+router.get("/users", getAllUsers);
+router.delete("/users/:id", deleteUser);
+router.put("/users/:id/toggle-status", toggleUserStatus);
+router.get("/appointments", getAllAppointments);
+router.put("/appointments/:id/status", updateAppointmentStatus);
+module.exports = router;
